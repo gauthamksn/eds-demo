@@ -1,0 +1,22 @@
+indices:
+  demoIndex:
+    include:
+      - demo/**
+    target: /demo-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: |
+          attribute(el, 'content')
+      theme:
+        select: head > meta[name="theme"]
+        value: |
+          attribute(el, 'content')
+      lastModified:
+        select: head > meta[name="last-update"]
+        value: |
+          parseTimestamp(attribute(el, "content"), 'ddd MMM DD YYYY hh:mm:ss GMT')
+      noteContent:
+        select: body div.note
+        value: |
+          textContent(el)
